@@ -1,0 +1,55 @@
+<div class="main">
+<nav class="sidenav" [ngStyle]="{'width': opened ? '200px' : '80px'}">
+
+  <ng-container *ngIf="opened; else sidebarMini">
+    <ul class="sidenav-content">
+      <div class="sidenav-content-header">
+        <span class="logo">Flower</span>
+        <mat-icon>local_florist</mat-icon>
+      </div>
+      <a class="sidenav-link" [routerLink]="pagesUrl.PROFILE" routerLinkActive="active-link">
+        <mat-icon>home</mat-icon>
+        My page
+      </a>
+      <a class="sidenav-link" [routerLink]="pagesUrl.NEWS" routerLinkActive="active-link">
+        <mat-icon>feed</mat-icon>
+        News
+      </a>
+      <a class="sidenav-link" [routerLink]="pagesUrl.PHOTO" routerLinkActive="active-link">
+        <mat-icon>photo_camera</mat-icon>
+        Photo
+      </a>
+      <a class="sidenav-link" [routerLink]="pagesUrl.USERS" routerLinkActive="active-link">
+        <mat-icon>supervised_user_circle</mat-icon>
+        Friend
+      </a>
+    </ul>
+    <button class="sidenav-hide-btn" mat-button (click)="toggleOpened()">
+      <mat-icon class="close">arrow_back_ios</mat-icon>
+    </button>
+  </ng-container>
+
+  <ng-template #sidebarMini>
+    <ul class="sidenav-content content-mini">
+      <div class="sidenav-content-header">
+        <mat-icon>local_florist</mat-icon>
+      </div>
+      <a class="sidenav-link" [routerLink]="pagesUrl.PROFILE" routerLinkActive="active-link">
+        <mat-icon>home</mat-icon>
+      </a>
+      <a class="sidenav-link" [routerLink]="pagesUrl.NEWS" routerLinkActive="active-link">
+        <mat-icon>feed</mat-icon>
+      </a>
+      <a class="sidenav-link" [routerLink]="pagesUrl.PHOTO" routerLinkActive="active-link">
+        <mat-icon>photo_camera</mat-icon>
+      </a>
+      <a class="sidenav-link" [routerLink]="pagesUrl.USERS" routerLinkActive="active-link">
+        <mat-icon>supervised_user_circle</mat-icon>
+      </a>
+    </ul>
+    <button *ngIf="!disabled" class="sidenav-hide-btn" mat-button (click)="toggleOpened()">
+      <mat-icon class="close">arrow_forward_ios</mat-icon>
+    </button>
+  </ng-template>
+</nav>
+</div>

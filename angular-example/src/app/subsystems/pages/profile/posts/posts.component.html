@@ -1,0 +1,46 @@
+<div class="container">
+
+  <mat-form-field (keydown.enter)="addPost()" class="container-write-post" appearance="fill">
+    <mat-label>Tell us about yourself</mat-label>
+    <textarea matInput placeholder="Hi.." [(ngModel)]="postContent"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="addPost()">Add</button>
+
+  <div *ngFor="let post of userProfile.posts.reverse()">
+    <div class="container-post-header">
+      <div class="container-post-header-info">
+        <p> {{post.author}} </p>
+        <p class="container-header-info-date">
+          {{post.data | date:'dd.MM.yy'}}
+        </p>
+      </div>
+      <div class="container-header-menu" [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+        <mat-menu #menu="matMenu">
+          <p (click)="removePost(post._id)" mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            Delete
+          </p>
+          <p (click)="editOn(post)" mat-menu-item>
+            <mat-icon>mode_edit</mat-icon>
+            Edit
+          </p>
+        </mat-menu>
+      </div>
+    </div>
+
+    <ng-container *ngIf="post._id !== editedPostId; else isEdit">
+      <div class="container-post-text">{{post.content}}</div>
+    </ng-container>
+
+    <ng-template #isEdit>
+      <mat-form-field class="container-post-edit" appearance="fill" (keydown.enter)="editPost(post)">
+        <textarea matInput placeholder="Hi.." [(ngModel)]="newContent"></textarea>
+      </mat-form-field>
+      <button mat-flat-button color="warn" class="btn" (click)="editPost(post)">Save</button>
+      <button mat-flat-button color="basic" class="btn" (click)="editOff()">Cancle</button>
+    </ng-template>
+
+    <hr>
+  </div>
+</div>

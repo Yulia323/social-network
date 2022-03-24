@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="container-avatar">
+    <img class="container-avatar" src="{{userProfile?.avatar || './assets/default.jpg'}}" alt="">
+    <button mat-flat-button class="save-status-btn">Change</button>
+  </div>
+  <div class="container-info">
+    <h2> {{userProfile.name}} {{userProfile.surname}} </h2>
+    <ng-container *ngIf="!editStatus; else isEditStatus">
+      <p class="container-info-status" (click)="editOnStatus()"> {{userProfile?.status || 'Status..'}} </p>
+    </ng-container>
+    <ng-template #isEditStatus>
+      <div class="container-info-status-write">
+        <input #status class="input" matInput (blur)="toggleEditStatus()"/>
+        <button mat-flat-button class="save-status-btn">Save</button>
+      </div>
+    </ng-template>
+  </div>
+  <app-posts class="posts"></app-posts>
+</div>
